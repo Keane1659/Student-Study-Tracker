@@ -101,5 +101,5 @@ Reviewed and tested the code in Docker, fixed an empty-file commit and a misname
 AI-generated code still needs verification. An empty commit and a paste error showed that, along with indent issues.
 
 ## Development Workflow
-- Each change was built on a feature branch (`feature/assignment-tracker`, `feature/css-styling`, `docs/update-readme`, `docs/copilot-usage`) and merged to `main` through a pull request.
+- Each change was built on a feature branch (`feature/assignment-tracker`, `feature/css-styling`, `docs/copilot-usage`) and merged to `main` through a pull request.
 - Commits are small and descriptive. The history also shows two mistakes I caught and fixed: an empty `app.py` commit and a misnamed `.dockerignore`.
