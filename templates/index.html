@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Study Tracker</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+    form.add { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 0.5rem; border-bottom: 1px solid #ddd; }
+    .done { text-decoration: line-through; color: #888; }
+    button { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Student Study Tracker</h1>
+
+  <form class="add" action="/add" method="post">
+    <input name="title" placeholder="Assignment title" required>
+    <input name="class_name" placeholder="Class" required>
+    <input name="due_date" type="date" required>
+    <input name="estimated_hours" type="number" step="0.5" min="0" placeholder="Est. hours">
+    <button type="submit">Add</button>
+  </form>
+
+  <table>
+    <tr><th>Assignment</th><th>Class</th><th>Due</th><th>Hours</th><th></th></tr>
+    {% for a in assignments %}
+    <tr class="{{ 'done' if a['completed'] else '' }}">
+      <td>{{ a['title'] }}</td>
+      <td>{{ a['class_name'] }}</td>
+      <td>{{ a['due_date'] }}</td>
+      <td>{{ a['estimated_hours'] }}</td>
+      <td>
+        <form action="/toggle/{{ a['id'] }}" method="post" style="display:inline">
+          <button type="submit">{{ 'Undo' if a['completed'] else 'Complete' }}</button>
+        </form>
+        <form action="/delete/{{ a['id'] }}" method="post" style="display:inline">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5">No assignments yet. Add one above.</td></tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
